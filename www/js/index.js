@@ -76,10 +76,17 @@ var app = {
         var scanner = window.cordova.require("cordova/plugin/BarcodeScanner");
         scanner.scan(
                 function (result) {
+                    /*
                     alert("We got a barcode\n" +
                         "Result: " + result.text + "\n" +
                         "Format: " + result.format + "\n" +
                         "Cancelled: " + result.cancelled);
+                    */
+                    if (result.cancelled) { return }
+                    var scanresult = document.getElementById("scanresult");
+                    scanresult.innerText = "=== Found a barcode (" +
+                        result.format + ") ===\n" +
+                        result.text;
                 },
                 function (error) {
                     alert("Scanning failed: " + error);
